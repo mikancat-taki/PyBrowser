@@ -17,3 +17,7 @@ QLineEdit {
 QTabWidget::pane {
     border: 1px solid #444;
 }
+
+mode_btn = QAction("🌗", self)
+mode_btn.triggered.connect(self.toggle_mode)
+self.addAction(mode_btn)
