@@ -1,0 +1,11 @@
+{
+  "name": "python-web-browser",
+  "version": "1.0.0",
+  "description": "Web版Pythonブラウザ風アプリ",
+  "scripts": {
+    "start": "python app.py",
+    "dev": "python app.py"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
