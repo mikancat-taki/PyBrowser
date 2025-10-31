@@ -1,8 +1,9 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QTabWidget, QWidget, QVBoxLayout
-from PyQt6.QtCore import QFile
+from PyQt6.QtWidgets import QApplication, QMainWindow, QTabWidget
+from PyQt6.QtCore import QUrl
 from browser_tab import BrowserTab
 from navbar import NavBar
+from utils import HistoryManager, FavoritesManager
 
 class Browser(QMainWindow):
     def __init__(self):
@@ -10,12 +11,16 @@ class Browser(QMainWindow):
         self.setWindowTitle("Python Browser")
         self.resize(1200, 800)
 
+        # 履歴・お気に入り管理
+        self.history_manager = HistoryManager()
+        self.favorites_manager = FavoritesManager()
+
         # タブ
         self.tabs = QTabWidget()
         self.setCentralWidget(self.tabs)
 
         # ツールバー
-        self.navbar = NavBar(self)
+        self.navbar = NavBar(self, self.history_manager, self.favorites_manager)
         self.addToolBar(self.navbar)
 
         # 最初のタブ
@@ -34,6 +39,7 @@ class Browser(QMainWindow):
         index = self.tabs.addTab(new_tab, "新しいタブ")
         self.tabs.setCurrentIndex(index)
         new_tab.urlChanged.connect(lambda qurl, browser=new_tab: self.update_tab_title(browser))
+        new_tab.urlChanged.connect(lambda qurl, browser=new_tab: self.history_manager.add(qurl.toString()))
         self.update_url_bar(index)
 
     def update_tab_title(self, browser):
@@ -47,13 +53,14 @@ class Browser(QMainWindow):
             self.navbar.url_bar.setText(browser.url().toString())
 
     # ナビゲーション
-    def navigate_to_url(self):
-        url = self.navbar.url_bar.text()
-        if not url.startswith("http"):
-            url = "http://" + url
+    def navigate_to_url(self, url=None):
         browser = self.tabs.currentWidget()
         if browser:
-            browser.setUrl(url)
+            if not url:
+                url = self.navbar.url_bar.text()
+            if not url.startswith("http"):
+                url = "http://" + url
+            browser.setUrl(QUrl(url))
 
     def back(self):
         browser = self.tabs.currentWidget()
