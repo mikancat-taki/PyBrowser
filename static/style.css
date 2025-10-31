@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    background-color: #1e1e1e;
+    color: white;
+    font-family: sans-serif;
+}
+
+#toolbar {
+    display: flex;
+    padding: 5px;
+    background-color: #2d2d2d;
+    align-items: center;
+}
+
+#urlbar {
+    flex: 1;
+    padding: 4px;
+    margin: 0 5px;
+    border: 1px solid #555;
+    background-color: #3c3c3c;
+    color: white;
+}
+
+iframe#browser {
+    width: 100%;
+    height: calc(100vh - 40px);
+    border: none;
+}
