@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Python Web Browser</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div id="toolbar">
+    <button id="back">←</button>
+    <button id="forward">→</button>
+    <input type="text" id="urlbar" placeholder="URL or Search">
+    <button id="go">⟳</button>
+    <button id="fav">★</button>
+    <button id="history">H</button>
+</div>
+<iframe id="browser" src="https://www.google.com"></iframe>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
