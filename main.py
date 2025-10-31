@@ -82,3 +82,23 @@ if __name__ == "__main__":
     window = Browser()
     window.show()
     sys.exit(app.exec())
+
+from PyQt6.QtWidgets import QMenu
+
+# タブ右クリック
+self.tabs.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+self.tabs.customContextMenuRequested.connect(self.tab_context_menu)
+
+def tab_context_menu(self, pos):
+    index = self.tabs.tabBar().tabAt(pos)
+    if index == -1:
+        return
+    menu = QMenu()
+    close_action = menu.addAction("閉じる")
+    duplicate_action = menu.addAction("複製")
+    action = menu.exec(self.tabs.mapToGlobal(pos))
+    if action == close_action:
+        self.tabs.removeTab(index)
+    elif action == duplicate_action:
+        browser = self.tabs.widget(index)
+        self.add_tab(browser.url().toString())
