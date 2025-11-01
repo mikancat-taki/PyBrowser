@@ -1,24 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <title>PyBrowser 検索</title>
-  <style>
-    body { font-family: Arial; background: #111; color: #fff; text-align: center; }
-    input { padding: 10px; width: 60%; border-radius: 10px; border: none; }
-    button { padding: 10px 20px; border: none; border-radius: 10px; background: #00bcd4; color: #fff; cursor: pointer; }
-    button:hover { background: #0097a7; }
-  </style>
+  <meta charset="UTF-8">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
 </head>
 <body>
-  <h1>🔍 PyBrowser</h1>
-  <form action="/search" method="get">
-    <input type="text" name="q" placeholder="キーワードを入力..." />
-    <button type="submit">検索</button>
-  </form>
-  <form action="/go" method="get" style="margin-top:20px;">
-    <input type="text" name="url" placeholder="URLを入力..." />
-    <button type="submit">アクセス</button>
-  </form>
+  <a href="/">← 戻る</a>
+  <h2>{{ title }}</h2>
+  {% if cached %}
+  <p>💾 キャッシュから表示しています。</p>
+  {% endif %}
+  <div class="content">{{ content|safe }}</div>
 </body>
 </html>
