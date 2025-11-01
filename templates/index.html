@@ -1,35 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <title>PySelfSearch — 自作検索エンジン</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8">
+  <title>PyBrowser</title>
+  <style>
+    body { font-family: sans-serif; background: #111; color: white; margin: 0; }
+    header { background: #222; padding: 10px; display: flex; gap: 8px; }
+    input { flex: 1; padding: 8px; border-radius: 6px; border: none; }
+    button { padding: 8px 12px; border: none; border-radius: 6px; background: #555; color: white; cursor: pointer; }
+    iframe { width: 100%; height: calc(100vh - 60px); border: none; background: white; }
+  </style>
 </head>
 <body>
-  <div id="app">
-    <header>
-      <h1>PySelfSearch</h1>
-      <div id="controls">
-        <input id="q" placeholder="検索ワードを入力" />
-        <button id="searchBtn">検索</button>
-        <button id="showFav">★ お気に入り</button>
-        <button id="showHist">履歴</button>
-      </div>
-    </header>
+  <header>
+    <input type="text" id="urlInput" placeholder="URLまたはキーワードを入力">
+    <button onclick="loadPage()">開く</button>
+  </header>
+  <iframe id="view"></iframe>
 
-    <section id="crawlSection">
-      <h2>クロール（手動）</h2>
-      <input id="seedInput" placeholder="シードURLをカンマ区切りで入力 (例: https://example.com)" />
-      <input id="maxPages" placeholder="最大ページ数 (デフォルト 100)" />
-      <button id="crawlBtn">クロール開始</button>
-      <div id="crawlStatus"></div>
-    </section>
-
-    <section id="results">
-      <!-- 検索結果がここに入る -->
-    </section>
-  </div>
-
-  <script src="/static/script.js"></script>
+  <script>
+    async function loadPage() {
+      const url = document.getElementById('urlInput').value.trim();
+      if (!url) return;
+      const iframe = document.getElementById('view');
+      iframe.src = '/fetch?url=' + encodeURIComponent(url);
+    }
+  </script>
 </body>
 </html>
