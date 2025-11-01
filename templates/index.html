@@ -1,21 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>Python Web Browser</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="utf-8" />
+  <title>PySelfSearch — 自作検索エンジン</title>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<div id="toolbar">
-    <button id="back">←</button>
-    <button id="forward">→</button>
-    <input type="text" id="urlbar" placeholder="URL or Search">
-    <button id="go">⟳</button>
-    <button id="fav">★</button>
-    <button id="history">H</button>
-</div>
-<iframe id="browser" src="https://www.google.com"></iframe>
+  <div id="app">
+    <header>
+      <h1>PySelfSearch</h1>
+      <div id="controls">
+        <input id="q" placeholder="検索ワードを入力" />
+        <button id="searchBtn">検索</button>
+        <button id="showFav">★ お気に入り</button>
+        <button id="showHist">履歴</button>
+      </div>
+    </header>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+    <section id="crawlSection">
+      <h2>クロール（手動）</h2>
+      <input id="seedInput" placeholder="シードURLをカンマ区切りで入力 (例: https://example.com)" />
+      <input id="maxPages" placeholder="最大ページ数 (デフォルト 100)" />
+      <button id="crawlBtn">クロール開始</button>
+      <div id="crawlStatus"></div>
+    </section>
+
+    <section id="results">
+      <!-- 検索結果がここに入る -->
+    </section>
+  </div>
+
+  <script src="/static/script.js"></script>
 </body>
 </html>
