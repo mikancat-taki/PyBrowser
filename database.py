@@ -4,11 +4,13 @@ DB_PATH = "cache.db"
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)
-    conn.execute("""CREATE TABLE IF NOT EXISTS pages (
-        query TEXT PRIMARY KEY,
-        html TEXT,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    )""")
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS pages (
+            query TEXT PRIMARY KEY,
+            html TEXT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
     conn.commit()
     conn.close()
 
