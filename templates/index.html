@@ -1,30 +1,21 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>PyBrowser</title>
-  <style>
-    body { font-family: sans-serif; background: #111; color: white; margin: 0; }
-    header { background: #222; padding: 10px; display: flex; gap: 8px; }
-    input { flex: 1; padding: 8px; border-radius: 6px; border: none; }
-    button { padding: 8px 12px; border: none; border-radius: 6px; background: #555; color: white; cursor: pointer; }
-    iframe { width: 100%; height: calc(100vh - 60px); border: none; background: white; }
-  </style>
+  <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-  <header>
-    <input type="text" id="urlInput" placeholder="URLまたはキーワードを入力">
-    <button onclick="loadPage()">開く</button>
-  </header>
-  <iframe id="view"></iframe>
+  <h1>🌈 PyBrowser</h1>
 
-  <script>
-    async function loadPage() {
-      const url = document.getElementById('urlInput').value.trim();
-      if (!url) return;
-      const iframe = document.getElementById('view');
-      iframe.src = '/fetch?url=' + encodeURIComponent(url);
-    }
-  </script>
+  <form action="/search" method="get">
+    <input type="text" name="q" placeholder="キーワードを検索..." required>
+    <button type="submit">検索</button>
+  </form>
+
+  <form action="/go" method="get" style="margin-top: 20px;">
+    <input type="text" name="url" placeholder="URLを入力 (例: example.com)" required>
+    <button type="submit">アクセス</button>
+  </form>
 </body>
 </html>
