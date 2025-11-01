@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <title>PyBrowser</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
 </head>
 <body>
   <h1>🌈 PyBrowser</h1>
-
   <form action="/search" method="get">
-    <input type="text" name="q" placeholder="キーワードを検索..." required>
+    <input type="text" name="q" placeholder="検索ワードを入力">
     <button type="submit">検索</button>
   </form>
 
-  <form action="/go" method="get" style="margin-top: 20px;">
-    <input type="text" name="url" placeholder="URLを入力 (例: example.com)" required>
+  <form action="/view" method="get" style="margin-top: 10px;">
+    <input type="text" name="url" placeholder="URLを入力 (https://...)">
     <button type="submit">アクセス</button>
   </form>
+
+  {% if error %}
+  <p style="color: red;">{{ error }}</p>
+  {% endif %}
 </body>
 </html>
